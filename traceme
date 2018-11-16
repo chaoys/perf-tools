@@ -1,0 +1,21 @@
+#!/bin/bash
+
+tracefs=`sed -ne 's/^tracefs \(.*\) tracefs.*/\1/p' /proc/mounts`
+
+cat <<-EOF
+reset ftrace after tracing:
+-----------------------------------
+echo 0 > $tracefs/tracing_on
+echo nop > $tracefs/current_tracer
+echo >$tracefs/set_ftrace_pid
+echo 1 >$tracefs/tracing_on
+-----------------------------------
+EOF
+
+echo nop > $tracefs/current_tracer
+echo 0 > $tracefs/tracing_on
+echo $$ > $tracefs/set_ftrace_pid
+echo function > $tracefs/current_tracer
+echo 1 > $tracefs/tracing_on
+
+exec "$@"
