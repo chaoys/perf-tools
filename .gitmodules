@@ -4,3 +4,6 @@
 [submodule "perf-scripts"]
 	path = perf-scripts
 	url = https://github.com/tgrabiec/perf-scripts.git
+[submodule "intel-cmt-cat"]
+	path = intel-cmt-cat
+	url = https://github.com/intel/intel-cmt-cat.git
